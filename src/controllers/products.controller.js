@@ -1,4 +1,4 @@
-import { getConnection, queries, sql } from "../database";
+import { getConnection, queries, sql } from "../database/index.js";
 import jwt from "jsonwebtoken";
 
 export const loginUsers = async(req, res) => {

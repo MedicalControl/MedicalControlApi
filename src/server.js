@@ -2,8 +2,8 @@ import express from 'express'
 import morgan from 'morgan'
 import cors from 'cors'
 
-import {Connection} from './models/products.model'
-import { routes } from './routes/index'
+import {Connection} from './models/products.model.js'
+import { routes } from './routes/index.js'
 
 
 export class Server {
