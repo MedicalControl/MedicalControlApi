@@ -1,26 +1,23 @@
-import sql from 'mssql'
-import {DB_NAME, DB_PASSWORD, DB_USER, DB_HOST} from '../config/config.js'
+import sql from 'mysql2'
+import { DB_NAME, DB_PASSWORD, DB_USER, DB_HOST } from '../config/config.js'
 
 
-const dbsettings = {
+const pool = sql.createPool({
+    host: DB_HOST,
     user: DB_USER,
     password: DB_PASSWORD,
-    server: DB_HOST,
     database: DB_NAME,
-    port: 1433,
-    options: {
-        encrypt: true,
-        trustServerCertificate: true,
-    },
-};
+    port: 3306,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
+});
 
 export async function getConnection() {
-    try {
-        const pool = await sql.connect(dbsettings)
-        .then(console.log('Connection good'));
-        return pool;
-    } catch (err) {
-        console.error(err)
-    }
-}
+    pool.getConnection((err, conn) => {
+        if (err) console.log(err)
+        console.log("Conected succesfully");
+    })
+};
+
 export {sql};
