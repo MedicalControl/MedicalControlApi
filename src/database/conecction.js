@@ -7,6 +7,7 @@ const dbsettings = {
     password: DB_PASSWORD,
     server: DB_HOST,
     database: DB_NAME,
+    port: 1433,
     options: {
         encrypt: true,
         trustServerCertificate: true,
