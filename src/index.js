@@ -1,5 +1,5 @@
-import app from './app'
+import { Server } from "./server";
 
-app.listen(app.get('port'))
+const server = new Server();
 
-console.log(`server on port ${app.get('port')}`)
+server.listen();

@@ -1,6 +1,6 @@
 import {config} from 'dotenv'
-config();
 
-export default {
-    port: process.env.PORT || 4000
-}
+if(process.env.NODE_ENV !== 'production')
+    config();
+
+export const PORT = process.env.PORT;

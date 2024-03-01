@@ -1,5 +1,33 @@
 import { getConnection, queries, sql } from "../database";
+import jwt from "jsonwebtoken";
 
+export const loginUsers = async(req, res) => {
+ const user = {id: 3};
+ const token = jwt.sign({user}, "SecretKey");
+
+ res.json({
+    token
+ })
+}
+
+
+function ensureToken(req, res, next)
+{
+    const bearerHeader = req.headers['authorization']; 
+    console.log(bearerHeader);
+    if (typeof bearerHeader != 'undefined')
+    {
+        const bearer = bearerHeader.split(" "); 
+        const bearerToken = bearer[1];
+        req.token = bearerToken;
+    }
+}
+
+
+
+
+
+//
 export const getProducts = async (req, res) => {
     try {
         const pool = await getConnection();
@@ -45,6 +73,7 @@ export const getProductById = async(req, res) =>{
 
 export const deleteProduct = async(req, res) =>{
     const {id} = req.params; 
+
 
     const pool = await getConnection();
     const result = await pool.request()
