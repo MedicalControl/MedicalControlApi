@@ -2,9 +2,7 @@ import express from 'express'
 import morgan from 'morgan'
 import cors from 'cors'
 
-import { getConnection } from './database/conecction'
 import {Connection} from './models/products.model'
-import { PORT } from './config/config'
 import { routes } from './routes/index'
 
 
