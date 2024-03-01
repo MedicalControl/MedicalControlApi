@@ -1,4 +1,4 @@
-import productRoutes from './products.routes.js'
+import productRoutes from './users.routes.js'
 export const routes = {
     productRoutes
 }

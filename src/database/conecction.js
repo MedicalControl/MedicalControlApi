@@ -13,7 +13,8 @@ const dbsettings = {
 
 export async function getConnection() {
     try {
-        const pool = await sql.connect(dbsettings);
+        const pool = await sql.connect(dbsettings)
+        .then(console.log('Connection good'));
         return pool;
     } catch (err) {
         console.error(err)

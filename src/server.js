@@ -2,7 +2,7 @@ import express from 'express'
 import morgan from 'morgan'
 import cors from 'cors'
 
-import {Connection} from './models/products.model.js'
+import {getConnection} from './database/conecction.js'
 import { routes } from './routes/index.js'
 
 
@@ -14,7 +14,7 @@ export class Server {
         this.configuration();
         this.middlewares();
         this.routes();
-        Connection();
+        getConnection();
     }
     configuration() {
         this.#app.set('port', 3000);
