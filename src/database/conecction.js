@@ -1,23 +1,20 @@
-import sql from 'mysql2'
-import { DB_NAME, DB_PASSWORD, DB_USER, DB_HOST } from '../config/config.js'
+import pg  from 'pg';
+import { DB_HOST, DB_NAME, DB_USER, DB_PASSWORD, PORT } from '../config/config.js'
 
-
-const pool = sql.createPool({
-    host: DB_HOST,
+const db = new pg.Client({
     user: DB_USER,
     password: DB_PASSWORD,
+    host: DB_HOST,
+    port: PORT,
     database: DB_NAME,
-    port: 3306,
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0
+    
 });
 
-export async function getConnection() {
-    pool.getConnection((err, conn) => {
-        if (err) console.log(err)
-        console.log("Conected succesfully");
+export function Connection(){
+    db.connect()
+    .then(() => {
+        console.log(`Database connected in the port ${db.port}`)})
+    .catch((err) => {
+        console.log(err);
     })
-};
-
-export {sql};
+}

@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import bycrypt from 'bcrypt'
 
-import { getConnection, queries, sql } from "../database/index.js";
+import { Connection, queries } from "../database/index.js";
 import AsingToken from '../auth/index.js'
 
 
