@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import bycrypt from 'bcrypt'
 
-import { getConnection, queries, sql } from "../database/index.js";
+import { getConnection, queries, pool } from "../database/index.js";
 import AsingToken from '../auth/index.js'
 
 
@@ -16,16 +16,8 @@ export const loginUsers = async (req, res) => {
 
 //
 export const getUsers = async (req, res) => {
-    try {
-        const pool = await getConnection();
-        const result = await pool.request()
-            .query(queries.getAllProduct)
-            .catch((err) => console.log(err))
-        res.json(result.recordset)
-    } catch (err) {
-        res.status(500);
-        res.send(err.message);
-    }
+    console.log('a')
+    res.json('a')
 };
 
 export const CreateUsers = async (req, res) => {

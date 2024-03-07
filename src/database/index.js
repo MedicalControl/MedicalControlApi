@@ -1,2 +1,2 @@
-export {getConnection, sql} from './conecction.js'
-export { queries} from './querys.js'
+export {getConnection, pool} from './connection.js'
+export { queries} from './query.js'
