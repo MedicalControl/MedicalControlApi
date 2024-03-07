@@ -16,8 +16,7 @@ export const loginUsers = async (req, res) => {
 
 //
 export const getUsers = async (req, res) => {
-    console.log('a')
-    res.json('a')
+    
 };
 
 export const CreateUsers = async (req, res) => {
