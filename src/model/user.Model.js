@@ -1,17 +1,30 @@
-import { Sequelize } from "sequelize";
+import { DataTypes } from 'sequelize'
 
+import { pool } from '../database/index.js'
+import { Rol } from './rols.Model.js'
 
-export const userModel = (sequelize) => {
-    const { DataTypes } = Sequelize;
+export const Users = pool.define('Users', {
+    idUser: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+    },
+    email: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    password: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+})
 
-    return sequelize.define("Rol", {
-        IdRol: {
-            type: DataTypes.INTEGER, 
-            autoIncrement: true, 
-            primaryKey: true,
-        }, 
-        RolName: {
-            type: "VARCHAR(20)"
-        }
-    })
-}
+Rol.hasMany(Users, {
+    foreignKey: 'id',
+    sourceKey: 'idRol'
+})
+
+Users.belongsTo(Rol, {
+    foreignKey: 'id',
+    targetKey: 'idRol'
+})

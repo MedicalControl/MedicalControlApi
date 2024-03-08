@@ -2,14 +2,10 @@ import express from 'express'
 import morgan from 'morgan'
 import cors from 'cors'
 
-<<<<<<< HEAD
 import {getConnection} from './database/connection.js'
-=======
-import {Connection} from './database/conecction.js'
->>>>>>> 40e18a374aa882a6dbb352d3149ef634b52fccfe
 import { routes } from './routes/index.js'
-
-
+import './model/user.Model.js'
+import './model/rols.Model.js'
 export class Server {
     #app;
 
@@ -18,7 +14,7 @@ export class Server {
         this.configuration();
         this.middlewares();
         this.routes();
-        Connection();
+        getConnection();
     }
     configuration() {
         this.#app.set('port', 3000);

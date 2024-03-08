@@ -18,11 +18,6 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
-<<<<<<< HEAD
-=======
-    "mssql": "^10.0.2",
-    "mysql2": "^3.9.1",
->>>>>>> 40e18a374aa882a6dbb352d3149ef634b52fccfe
     "pg": "^8.11.3",
     "sequelize": "^6.37.1"
   },

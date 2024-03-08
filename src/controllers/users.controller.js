@@ -3,8 +3,8 @@ import bycrypt from 'bcrypt'
 
 import { getConnection, queries, pool } from "../database/index.js";
 import AsingToken from '../auth/index.js'
-
-
+import { Users } from '../model/user.Model.js'
+import { Rol } from "../model/rols.Model.js";
 export const loginUsers = async (req, res) => {
     const user = { id: 3 };
     const token = jwt.sign({ user }, "SecretKey");
@@ -14,28 +14,35 @@ export const loginUsers = async (req, res) => {
     })
 }
 
-//
 export const getUsers = async (req, res) => {
-    
+    const Result = await pool.query("SELECT column_name FROM information_schema.columns WHERE table_schema = 'public' AND table_name = 'Rols' AND column_name = 'RolName'")
+    res.json(Result)
 };
 
 export const CreateUsers = async (req, res) => {
-    const { Correo, Contrasena } = req.body;
-    if (!Contrasena || !Correo)
-        return res.status(400).json({ msg: 'Bad request. Please fill all fields' });
+    const { password, email, id } = req.body;
     try {
-        const pool = await getConnection();
-        const result = await pool.request()
-            .input("Contrasena", sql.VarChar, await bycrypt.hash(Contrasena, 5))
-            .input("Correo", sql.VarChar, Correo)
-            .input("IDRol", sql.Int, 1)
-            .query(queries.createUsers)
-        res.json(`Usuario creado`)
-    } catch (err) {
-        console.log(err);
-    }
-}
+        const newUser = await Users.create({
+            password,
+            email,
+            id
+        })
+        console.log(newUser);
+        res.send('user was created')
 
+    } catch (err) { console.log(err) }
+
+}
+export const createRol = async (req, res) => {
+    const { nameRol } = req.body;
+    try {
+        const newRol = await Rol.create({
+            nameRol,
+        })
+        console.log(newRol);
+        res.send('Rol was created');
+    } catch (err) { console.log(err) }
+}
 export const InicioSesionUsers = async (req, res) => {
     const { Correo, Contrasena } = req.body;
     try {
@@ -62,80 +69,3 @@ export const InicioSesionUsers = async (req, res) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-export const createNewProduct = async (req, res) => {
-    const { Name, Description } = req.body;
-    let { Quantity } = req.body;
-    if (!Name || !Description)
-        return res.status(400).json({ msg: 'Bad request. Please fill all fields' });
-    if (Quantity == null) Quantity = 0;
-
-    try {
-        const pool = await getConnection();
-        await pool.request()
-            .input("Name", sql.VarChar, Name)
-            .input("Description", sql.Text, Description)
-            .input("Quantity", sql.Int, Quantity)
-            .query(queries.createProduct);
-    } catch (err) {
-        res.status(500);
-        res.send(err.message);
-    }
-}
-
-export const getProductById = async (req, res) => {
-    const { id } = req.params;
-
-    const pool = await getConnection();
-    const result = await pool.request()
-        .input('id', id)
-        .query(queries.getProductById)
-    res.send("product");
-
-    console.log(result.recordset[0]);
-}
-
-export const deleteProduct = async (req, res) => {
-    const { id } = req.params;
-
-
-    const pool = await getConnection();
-    const result = await pool.request()
-        .input('id', id)
-        .query(queries.deleteProduct)
-
-    res.send("Delete products");
-}
-
-export const updateById = async (req, res) => {
-    const { id } = req.params;
-    const { Name } = req.body;
-
-    const pool = await getConnection();
-    const result = await pool.request()
-        .input('id', id)
-        .input('Name', sql.VarChar, Name)
-        .query(queries.updateById)
-
-    res.send("Update products");
-}
