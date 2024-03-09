@@ -15,8 +15,8 @@ export const loginUsers = async (req, res) => {
 }
 
 export const getUsers = async (req, res) => {
-    const Result = await pool.query("SELECT column_name FROM information_schema.columns WHERE table_schema = 'public' AND table_name = 'Rols' AND column_name = 'RolName'")
-    res.json(Result)
+    const usersList = await Users.findAll()
+    res.json(usersList)
 };
 
 export const CreateUsers = async (req, res) => {
