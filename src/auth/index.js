@@ -1,8 +1,8 @@
 import jwtoken from "jsonwebtoken"
 
-import {jwt} from '../config/config.js'
+import {jwtSK} from '../config/config.js'
 
-const secret = jwt;
+const secret = jwtSK;
 
 export  default function AsingToken(data){
     return jwtoken.sign(data, secret)

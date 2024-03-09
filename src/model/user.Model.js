@@ -11,11 +11,25 @@ export const Users = pool.define('Users', {
     },
     email: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true,
+        validate: {
+            isEmail: {
+                msg: "El email tiene que ser valido"
+            },
+            notNull: {
+                msg: 'Los campos no pueden estar vacios'
+            }
+        }
     },
     password: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            notNull: {
+                msg: 'Los campos no pueden estar vacios'
+            }
+        }
     },
 })
 

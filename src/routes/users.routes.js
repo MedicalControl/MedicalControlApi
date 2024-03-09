@@ -1,12 +1,16 @@
 import { Router } from "express"
 
-import {CreateUsers, InicioSesionUsers, getUsers, createRol } from '../controllers/users.controller.js'
+import {CreateUsers, getAllUsers, createRol, loginUsers } from '../controllers/index.js'
 
 const router = Router();
 
-router.get('/', getUsers)
-router.get('/InicioSesion', InicioSesionUsers)
+//Routes for Users
+router.get('/', getAllUsers)
+router.get('/login', loginUsers)
 router.post('/CreateUsers', CreateUsers)
+
+
+//Routes for Rol
 router.post('/createRol', createRol)
 
 
