@@ -10,3 +10,9 @@ export const createRol = async (req, res) => {
         res.send('Rol was created');
     } catch (err) { console.log(err) }
 }
+
+
+export const getAllRol = async (req, res) => {
+    const AllRol = await Rol.findAll()
+    res.json(AllRol);
+}
