@@ -15,10 +15,10 @@ export const Users = pool.define('Users', {
         unique: true,
         validate: {
             isEmail: {
-                msg: "El email tiene que ser valido"
+                msg: "The email is invalid"
             },
             notNull: {
-                msg: 'Los campos no pueden estar vacios'
+                msg: 'fields cannot be empty'
             }
         }
     },
@@ -27,10 +27,14 @@ export const Users = pool.define('Users', {
         allowNull: false,
         validate: {
             notNull: {
-                msg: 'Los campos no pueden estar vacios'
+                msg: 'fields cannot be empty'
             }
         }
     },
+    id:{
+        type: DataTypes.INTEGER, 
+        defaultValue: 2, 
+    }
 })
 
 Rol.hasMany(Users, {

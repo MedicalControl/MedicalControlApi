@@ -10,6 +10,8 @@ export const loginUsers = async (req, res) => {
     const userWithEmail = await Users.findOne({ where: { email } })
         .catch((err) => { console.log('Error', err) });
 
+    if (!email || !password)
+        return res.json({msg: "The fields cannot be empty"})
     if (!userWithEmail || !bcrypt.compareSync(password, userWithEmail.password))
         return res.json({ message: "Email or password dos not match!" });
     const jwtToken = jwt.sign({ id: userWithEmail.id, email: userWithEmail.email }, jwtSK);
@@ -26,24 +28,19 @@ export const getAllUsers = async (req, res) => {
 export const CreateUsers = async (req, res) => {
     const { password, email, id } = req.body;
 
-    const passowrodTk = bcrypt.hashSync(password, Number.parseInt(JKTROUNDS));
+    const passwordTk = bcrypt.hashSync(password, Number.parseInt(JKTROUNDS));
 
     const newUser = await Users.create({
-        password: passowrodTk,
+        password: passwordTk,
         email,
         id
     }).then(user => {
         let token = jwt.sign({ user: user }, jwtSK);
         res.json({
-            mssg: "Usuario creado",
+            msg: "User was created",
             token: token
         })
     }).catch((err) => {
         res.status(500).json(err);
     });
-
-
 }
-
-
-

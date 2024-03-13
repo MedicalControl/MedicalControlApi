@@ -13,6 +13,3 @@ export const Rol = pool.define('Rol', {
         allowNull: false,
     }
 })
-
-
-

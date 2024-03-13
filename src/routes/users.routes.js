@@ -1,18 +1,18 @@
 import { Router } from "express"
 
-import {CreateUsers, getAllUsers, createRol, loginUsers, getAllRol} from '../controllers/index.js'
+import { auth } from '../middlewares/auth.js';
+import { CreateUsers, getAllUsers, createRol, loginUsers, getAllRol } from '../controllers/index.js'
 
 const router = Router();
-
 //Routes for Users
-router.get('/getAllUsers', getAllUsers)
+router.get('/getAllUsers', auth, getAllUsers)
 router.get('/login', loginUsers)
 router.post('/CreateUsers', CreateUsers)
 
 
-//Routes for Rol
-router.get('/getAllRol', getAllRol)
+//Routes get Rol
 router.post('/createRol', createRol)
+router.get('/getAllRol', auth, getAllRol)
 
 
 
