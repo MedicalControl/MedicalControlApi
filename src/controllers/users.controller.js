@@ -13,7 +13,7 @@ export const loginUsers = async (req, res) => {
     if (!email || !password)
         return res.json({msg: "The fields cannot be empty"})
     if (!userWithEmail || !bcrypt.compareSync(password, userWithEmail.password))
-        return res.json({ message: "Email or password dos not match!!" });
+        return res.json({ message: "Email or password dos not match!!!" });
     const jwtToken = jwt.sign({ id: userWithEmail.id, email: userWithEmail.email }, jwtSK);
     res.json({ token: jwtToken })
 }
