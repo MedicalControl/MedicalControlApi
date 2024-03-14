@@ -8,7 +8,7 @@ export const loginUsers = async (req, res) => {
     const { email, password } = req.body;
 
     const userWithEmail = await Users.findOne({ where: { email } })
-        .catch((err) => { console.log('Error', err) });
+        .catch((err) => { console.log('Error ', err) });
 
     if (!email || !password)
         return res.json({msg: "The fields cannot be empty"})
