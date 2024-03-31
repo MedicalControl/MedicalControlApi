@@ -2,22 +2,34 @@ import jwt from "jsonwebtoken";
 import bcrypt from 'bcrypt'
 
 import { Users } from '../model/user.Model.js'
-import { jwtSK, JKTROUNDS } from '../config/config.js'
+import { jwtSK, jwtRounds } from '../config/config.js'
 
 export const loginUsers = async (req, res) => {
     const { email, password } = req.body;
 
     const userWithEmail = await Users.findOne({ where: { email } })
-        .catch((err) => { console.log('Error ', err) });
+        .catch((err) => { console.log('Error: ', err) });
 
     if (!email || !password)
-        return res.json({msg: "The fields cannot be empty"})
+        return res.json({ msg: "The fields cannot be empty" })
     if (!userWithEmail || !bcrypt.compareSync(password, userWithEmail.password))
-        return res.json({ message: "Email or password dos not match!" });
+        return res.json({ message: "Email or password does not match!" });
     const jwtToken = jwt.sign({ id: userWithEmail.id, email: userWithEmail.email }, jwtSK);
     res.json({ token: jwtToken })
 }
+export const getOneUser = async (req, res) => {
+    const { email } = req.body;
 
+    const usersWithEmail = await Users.findOne({ where: { email } })
+        .catch((err) => { console.log("Error: ", err) });
+
+    if (!usersWithEmail) console.log("The email doesn't exist")
+    else console.log(usersWithEmail);
+
+    res.json('Hello word')
+
+
+}
 
 export const getAllUsers = async (req, res) => {
     const usersList = await Users.findAll()
@@ -28,7 +40,7 @@ export const getAllUsers = async (req, res) => {
 export const CreateUsers = async (req, res) => {
     const { password, email, id } = req.body;
 
-    const passwordTk = bcrypt.hashSync(password, Number.parseInt(JKTROUNDS));
+    const passwordTk = bcrypt.hashSync(password, Number.parseInt(jwtRounds));
 
     const newUser = await Users.create({
         password: passwordTk,
@@ -44,3 +56,4 @@ export const CreateUsers = async (req, res) => {
         res.status(500).json(err);
     });
 }
+
