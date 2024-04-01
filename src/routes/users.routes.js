@@ -6,7 +6,7 @@ import { CreateUsers, getAllUsers, createRol, loginUsers, getAllRol, getOneUser 
 const router = Router();
 //Routes for Users
 router.get('/getAllUsers', auth, getAllUsers)
-router.get('/login', loginUsers)
+router.post('/login', loginUsers)
 router.post('/CreateUsers', CreateUsers)
 router.get('/getOneUser', getOneUser)
 

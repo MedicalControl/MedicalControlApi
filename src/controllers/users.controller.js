@@ -27,13 +27,11 @@ export const getOneUser = async (req, res) => {
     if (!usersWithEmail) console.log("The email doesn't exist")
     else console.log(usersWithEmail);
 
-    res.json('Hello word')
-
 
 }
 
 export const getAllUsers = async (req, res) => {
-    const usersList = await Users.findAll()
+    const usersList = await Patient.findAll()
     res.json(usersList)
 };
 
@@ -42,11 +40,11 @@ export const CreateUsers = async (req, res) => {
     const { password, email, identificationCard, name, lastName,
         homeAddress, innsNumber, profession, birthdate, placeOfBirth,
         sex, numberCellphone, bloodType } = req.body;
-    const passwordTk = bcrypt.hashSync(password, Number.parseInt(jwtRounds));
     var { idRol } = req.body;
     let idUser;
     idRol ??= 1;
 
+    const passwordTk = bcrypt.hashSync(password, Number.parseInt(jwtRounds));
 
     if (!identificationCard && !name && !lastName,
         !homeAddress && !profession,
@@ -75,7 +73,7 @@ export const CreateUsers = async (req, res) => {
             }).catch(err => {
                 res.status(500).json({ msg: err['errors'][0].message });
                 Users.destroy({
-                    where: {idUser}
+                    where: { idUser }
                 })
             })
 
