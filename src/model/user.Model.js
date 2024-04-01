@@ -1,4 +1,4 @@
-import { DataTypes } from 'sequelize'
+import { DataTypes, where } from 'sequelize'
 
 import { pool } from '../database/index.js'
 import { Rol } from './rols.Model.js'
@@ -30,11 +30,6 @@ export const Users = pool.define('Users', {
                 msg: 'fields cannot be empty'
             }
         }
-    },
-    id: {
-        type: DataTypes.INTEGER,
-        defaultValue: 2,
-        allowNull: true
     }
 })
 
@@ -90,7 +85,7 @@ export const Patient = pool.define('Patient', {
         allowNull: true,
     },
     birthdate: {
-        type: DataTypes.STRING,
+        type: DataTypes.DATE,
         allowNull: false,
     },
     placeOfBirth: {
@@ -103,21 +98,23 @@ export const Patient = pool.define('Patient', {
         validate: {
             isAlphanumeric: {
                 msg: "The inserted option is invalid"
-            }
+            },
+            len: 1,
+
         }
     },
     numberCellphone: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+            len: 8
+        }
     },
     bloodType: {
         type: DataTypes.STRING,
         allowNull: false,
     }
 });
-
-
-
 Rol.hasMany(Users, {
     foreignKey: {
         allowNull: false,

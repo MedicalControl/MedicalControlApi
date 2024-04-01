@@ -8,7 +8,7 @@ export const auth = (req, res, next) => {
         let token = req.headers.authorization.split(" ")[1];
         Jwt.verify(token, jwtSK, (err, decode) => {
             if (err)
-                res.status(500).json({ msg: "Problem has ocurred" })
+                res.status(500).json({ msg: "Problem has ocurred", err: err })
             else {
                 console.log(decode);
                 next();

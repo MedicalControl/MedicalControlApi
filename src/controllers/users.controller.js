@@ -49,7 +49,7 @@ export const CreateUsers = async (req, res) => {
 
 
     if (!identificationCard && !name && !lastName,
-        !homeAddress && innsNumber && !profession,
+        !homeAddress && !profession,
         !birthdate && !placeOfBirth && !sex,
         !numberCellphone && !bloodType)
         res.status(400).json({ msg: 'The fields cannot be empty' })
@@ -66,18 +66,21 @@ export const CreateUsers = async (req, res) => {
                 birthdate, placeOfBirth, sex,
                 numberCellphone, bloodType, idUser
             }).then(Patient => {
+                console.log(user)
                 let token = jwt.sign({ user: user }, jwtSK);
-                res.json({
+                res.status(201).json({
                     msg: "Patient was created",
                     token: token
                 })
             }).catch(err => {
-                res.status(500).json({ msg: err.message });
+                res.status(500).json({ msg: err['errors'][0].message });
+                Users.destroy({
+                    where: {idUser}
+                })
             })
 
         }).catch((err) => {
-            res.status(500).json(err.message)
-            console.log(err)
+            res.status(500).json(err['errors'][0].message)
         });
 
     }
