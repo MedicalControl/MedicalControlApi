@@ -74,7 +74,12 @@ export const Patient = pool.define('Patient', {
     },
     homeAddress: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
+        validate: {
+            notNull: {
+                msg: "The home address cannot be empty"
+            }
+        }
     },
     innsNumber: {
         type: DataTypes.STRING,
@@ -83,6 +88,11 @@ export const Patient = pool.define('Patient', {
     profession: {
         type: DataTypes.STRING,
         allowNull: true,
+        validate: {
+            isAlphanumeric: {
+                msg: "The profession cannot be alphanumeric"
+            }
+        }
     },
     birthdate: {
         type: DataTypes.DATE,
@@ -99,7 +109,10 @@ export const Patient = pool.define('Patient', {
             isAlphanumeric: {
                 msg: "The inserted option is invalid"
             },
-            len: 1,
+            len: {
+                args: [1,1], 
+                msg: 'The sex is invalid'
+            },
 
         }
     },
@@ -107,12 +120,22 @@ export const Patient = pool.define('Patient', {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-            len: 8
+            len:{
+                args: [8,8], 
+                msg: "The number phone is invalid"
+            }
         }
     },
     bloodType: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+            len:{
+                args: [2,3],
+                msg: "The blood type is invalid"
+            }
+
+        }
     }
 });
 Rol.hasMany(Users, {
