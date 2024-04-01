@@ -1,5 +1,6 @@
 # MedicalControlApi
 
+<a href="https://nodejs.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="40" height="40"/> </a>
 Node.js es un entorno de ejecución de JavaScript del lado del servidor que permite a los desarrolladores crear aplicaciones web y de red escalables y de alto rendimiento. Utiliza el motor de JavaScript V8 de Google Chrome para ejecutar código JavaScript fuera del navegador. Node.js es conocido por su eficiencia y velocidad, lo que lo hace adecuado para aplicaciones que requieren una gran cantidad de entrada/salida de red, como aplicaciones de tiempo real, API RESTful, servidores de juegos en línea, aplicaciones de chat en tiempo real, entre otros.
 
 # Base de datos
