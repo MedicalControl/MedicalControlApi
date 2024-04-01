@@ -1,8 +1,9 @@
 import jwt from "jsonwebtoken";
 import bcrypt from 'bcrypt'
 
-import { Users } from '../model/user.Model.js'
+import { Patient, Users } from '../model/user.Model.js'
 import { jwtSK, jwtRounds } from '../config/config.js'
+
 
 export const loginUsers = async (req, res) => {
     const { email, password } = req.body;
@@ -38,22 +39,48 @@ export const getAllUsers = async (req, res) => {
 
 
 export const CreateUsers = async (req, res) => {
-    const { password, email, id } = req.body;
-
+    const { password, email, identificationCard, name, lastName,
+        homeAddress, innsNumber, profession, birthdate, placeOfBirth,
+        sex, numberCellphone, bloodType } = req.body;
     const passwordTk = bcrypt.hashSync(password, Number.parseInt(jwtRounds));
+    var { idRol } = req.body;
+    let idUser;
+    idRol ??= 1;
 
-    const newUser = await Users.create({
-        password: passwordTk,
-        email,
-        id
-    }).then(user => {
-        let token = jwt.sign({ user: user }, jwtSK);
-        res.json({
-            msg: "User was created",
-            token: token
-        })
-    }).catch((err) => {
-        res.status(500).json(err);
-    });
+
+    if (!identificationCard && !name && !lastName,
+        !homeAddress && innsNumber && !profession,
+        !birthdate && !placeOfBirth && !sex,
+        !numberCellphone && !bloodType)
+        res.status(400).json({ msg: 'The fields cannot be empty' })
+    else {
+        const newUser = await Users.create({
+            password: passwordTk,
+            email,
+            idRol,
+        }).then(async (user) => {
+            idUser = user.idUser;
+            await Patient.create({
+                identificationCard, name, lastName,
+                homeAddress, innsNumber, profession,
+                birthdate, placeOfBirth, sex,
+                numberCellphone, bloodType, idUser
+            }).then(Patient => {
+                let token = jwt.sign({ user: user }, jwtSK);
+                res.json({
+                    msg: "Patient was created",
+                    token: token
+                })
+            }).catch(err => {
+                res.status(500).json({ msg: err.message });
+            })
+
+        }).catch((err) => {
+            res.status(500).json(err.message)
+            console.log(err)
+        });
+
+    }
+
 }
 

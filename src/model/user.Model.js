@@ -34,6 +34,7 @@ export const Users = pool.define('Users', {
     id: {
         type: DataTypes.INTEGER,
         defaultValue: 2,
+        allowNull: true
     }
 })
 
@@ -89,20 +90,15 @@ export const Patient = pool.define('Patient', {
         allowNull: true,
     },
     birthdate: {
-        type: DataTypes.DATE,
+        type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-            isAlpha: {
-                msg: "The birth date is invalid"
-            }
-        }
     },
     placeOfBirth: {
         type: DataTypes.STRING,
         allowNull: false
     },
     sex: {
-        type: DataTypes.CHAR,
+        type: DataTypes.STRING,
         allowNull: false,
         validate: {
             isAlphanumeric: {
@@ -113,26 +109,10 @@ export const Patient = pool.define('Patient', {
     numberCellphone: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-            max: 8,
-            min: 8,
-            isAlpha: {
-                msg: "The number phone is invalid"
-            },
-            isDecimal: {
-                msg: "The number phone is invalid"
-            }
-        }
     },
     bloodType: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-            max: 3,
-            isAlphanumeric: {
-                msg: "The blood type is invalid"
-            }
-        }
     }
 });
 
