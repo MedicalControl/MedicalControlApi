@@ -12,11 +12,11 @@ export const loginUsers = async (req, res) => {
         .catch((err) => { console.log('Error: ', err) });
 
     if (!email || !password)
-        return res.json({ msg: "The fields cannot be empty" })
+        return res.status(400).json({ msg: "The fields cannot be empty" })
     if (!userWithEmail || !bcrypt.compareSync(password, userWithEmail.password))
-        return res.json({ message: "Email or password does not match!" });
+        return res.status(400).json({ message: "Email or password does not match!" });
     const jwtToken = jwt.sign({ id: userWithEmail.id, email: userWithEmail.email }, jwtSK);
-    res.json({ token: jwtToken })
+    res.status(201).json({ token: jwtToken })
 }
 export const getOneUser = async (req, res) => {
     const { email } = req.body;
