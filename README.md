@@ -22,7 +22,7 @@
 He seleccionado Sequelize ya que gracias a su capacidad para simplificar la interacción con bases de datos relacionales en aplicaciones Node.js, Sequelize se destaca como una herramienta esencial para desarrolladores. Ofreciendo un ORM robusto y flexible, Sequelize facilita la creación, consulta y manipulación de datos en bases de datos como PostgreSQL, MySQL, SQLite y otros. Su soporte para consultas complejas, relaciones entre tablas y migraciones de esquema simplifica el desarrollo y el mantenimiento de aplicaciones, al tiempo que garantiza un rendimiento óptimo. Respaldado por una comunidad activa y una documentación exhaustiva, Sequelize se posiciona como una opción confiable para proyectos que requieren una gestión eficiente y escalable de bases de datos relacionales en entornos Node.js.
 
 
-#Instalacion del proyecto 
+# Instalacion del proyecto 
 
 - Debes de tener instalado node.js para poder compilar este proyecto
 - Una vez que tengas clonado el repositorio en tu maquina local procede a instalar todas las dependencias con *npm install*
