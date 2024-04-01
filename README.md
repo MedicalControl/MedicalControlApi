@@ -9,9 +9,12 @@
 
 
 # Base de datos
-
-
-Como base de datos he seleccionado Posgress por su robustez, escalabilidad y rendimiento consistente, PostgreSQL emerge como una opción atractiva para la gestión de datos en proyectos diversos. Su amplio conjunto de características avanzadas, combinado con su compatibilidad con SQL y la posibilidad de personalización a través de extensiones, ofrece una solución flexible y poderosa para aplicaciones que requieren una manipulación eficiente de datos. Respaldado por una comunidad activa y recursos abundantes en línea, PostgreSQL brinda la confianza necesaria para enfrentar los desafíos de desarrollo y escalabilidad, asegurando un soporte sólido a lo largo del ciclo de vida del proyecto.
+<p>
+    <a href="https://www.postgresql.org" target="_blank" rel="noreferrer"> 
+        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg" alt="postgresql" width="100" height="100"/> 
+    </a>
+    Como base de datos he seleccionado Posgress por su robustez, escalabilidad y rendimiento consistente, PostgreSQL emerge como una opción atractiva para la gestión de datos en proyectos diversos. Su amplio conjunto de características avanzadas, combinado con su compatibilidad con SQL y la posibilidad de personalización a través de extensiones, ofrece una solución flexible y poderosa para aplicaciones que requieren una manipulación eficiente de datos. Respaldado por una comunidad activa y recursos abundantes en línea, PostgreSQL brinda la confianza necesaria para enfrentar los desafíos de desarrollo y escalabilidad, asegurando un soporte sólido a lo largo del ciclo de vida del proyecto.
+</p>
 
 # ORM (Mapeador Objeto-Relacional)
 
