@@ -138,6 +138,33 @@ export const Patient = pool.define('Patient', {
         }
     }
 });
+
+export const Image =  pool.define('Images',{
+    idImage: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+    },
+    name: {
+        type: DataTypes.STRING, 
+        allowNull: false, 
+        validate: {
+            isNull: {
+                msg: "The image name cannot be empty" 
+            }
+        }
+    },
+    data: {
+        type: DataTypes.BLOB, 
+        allowNull: false, 
+        validate: {
+            isNull: {
+                msg: "The image data cannot be empty"
+            }
+        }
+    }
+
+})
 Rol.hasMany(Users, {
     foreignKey: {
         allowNull: false,
@@ -166,4 +193,16 @@ Patient.belongsTo(Users, {
         name: "idUser"
     },
     sourceKey: 'idUser'
+});
+Image.hasOne(Patient, {
+    foreignKey: {
+        allowNull: false, 
+        name: "idImage"
+    }
+});
+Patient.belongsTo(Image, {
+    foreignKey: {
+        allowNull: false, 
+        name: "idImage"
+    },
 });
