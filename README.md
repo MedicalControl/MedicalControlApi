@@ -1,20 +1,25 @@
 # MedicalControlApi
 
-<p>
-    <a href="https://nodejs.org" target="_blank" rel="noreferrer" style="display: inline-block; vertical-align: top;">
-        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="100" height="100" style="float: center; margin-right: 10px, margin-bottom: 20px;"/>
+<div align="center">
+    <a href="https://nodejs.org" target="_blank" rel="noreferrer" >
+        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="100" height="100"  />
     </a>
-    Node.js es un entorno de ejecución de JavaScript del lado del servidor que permite a los desarrolladores crear aplicaciones web y de red escalables y de alto rendimiento. Utiliza el motor de JavaScript V8 de Google Chrome para ejecutar código JavaScript fuera del navegador. Node.js es conocido por su eficiencia y velocidad, lo que lo hace adecuado para aplicaciones que requieren una gran cantidad de entrada/salida de red, como aplicaciones de tiempo real, API RESTful, servidores de juegos en línea, aplicaciones de chat en tiempo real, entre otros.
-</p>
+    <p>
+        Node.js es un entorno de ejecución de JavaScript del lado del servidor que permite a los desarrolladores crear aplicaciones web y de red escalables y de alto rendimiento. Utiliza el motor de JavaScript V8 de Google Chrome para ejecutar código JavaScript fuera del navegador. Node.js es conocido por su eficiencia y velocidad, lo que lo hace adecuado para aplicaciones que requieren una gran cantidad de entrada/salida de red, como aplicaciones de tiempo real, API RESTful, servidores de juegos en línea, aplicaciones de chat en tiempo real, entre otros.
+    </p>
+</div>
+
 
 
 # Base de datos
-<p>
+<div align="center">
     <a href="https://www.postgresql.org" target="_blank" rel="noreferrer"> 
         <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg" alt="postgresql" width="100" height="100"/> 
     </a>
+    <p>
     Como base de datos he seleccionado Posgress por su robustez, escalabilidad y rendimiento consistente, PostgreSQL emerge como una opción atractiva para la gestión de datos en proyectos diversos. Su amplio conjunto de características avanzadas, combinado con su compatibilidad con SQL y la posibilidad de personalización a través de extensiones, ofrece una solución flexible y poderosa para aplicaciones que requieren una manipulación eficiente de datos. Respaldado por una comunidad activa y recursos abundantes en línea, PostgreSQL brinda la confianza necesaria para enfrentar los desafíos de desarrollo y escalabilidad, asegurando un soporte sólido a lo largo del ciclo de vida del proyecto.
-</p>
+    </p>
+</div>
 
 # ORM (Mapeador Objeto-Relacional)
 
