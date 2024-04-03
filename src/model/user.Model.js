@@ -194,15 +194,3 @@ Patient.belongsTo(Users, {
     },
     sourceKey: 'idUser'
 });
-Image.hasOne(Patient, {
-    foreignKey: {
-        allowNull: false, 
-        name: "idImage"
-    }
-});
-Patient.belongsTo(Image, {
-    foreignKey: {
-        allowNull: false, 
-        name: "idImage"
-    },
-});
