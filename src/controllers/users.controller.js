@@ -44,7 +44,6 @@ export const CreateUsers = async (req, res) => {
     let idUser;
     idRol ??= 1;
 
-    const passwordTk = bcrypt.hashSync(password, Number.parseInt(jwtRounds));
 
     if (!identificationCard && !name && !lastName,
         !homeAddress && !profession,
@@ -52,6 +51,7 @@ export const CreateUsers = async (req, res) => {
         !numberCellphone && !bloodType)
         res.status(400).json({ msg: 'The fields cannot be empty' })
     else {
+        const passwordTk = bcrypt.hashSync(password, Number.parseInt(jwtRounds));
         const newUser = await Users.create({
             password: passwordTk,
             email,
