@@ -54,9 +54,6 @@ export const Patient = pool.define('Patient', {
         validate: {
             notNull: {
                 msg: "The name cannot be empty"
-            },
-            isAlphanumeric: {
-                msg: "The name is invalid"
             }
         }
     },
@@ -66,9 +63,6 @@ export const Patient = pool.define('Patient', {
         validate: {
             notNull: {
                 msg: "The last name cannot be empty"
-            },
-            isAlphanumeric: {
-                msg: "The last name is invalid"
             }
         }
     },
@@ -87,16 +81,21 @@ export const Patient = pool.define('Patient', {
     },
     profession: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
         validate: {
-            isAlphanumeric: {
-                msg: "The profession cannot be alphanumeric"
+            notNull: {
+                msg: "The profession cannot be empty"
             }
         }
     },
     birthdate: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false,
+        validate: {
+            isDate: {
+                msg: "The date is invalid"
+            }
+        }
     },
     placeOfBirth: {
         type: DataTypes.STRING,

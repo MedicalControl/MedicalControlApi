@@ -57,6 +57,7 @@ export const CreateUsers = async (req, res) => {
             email,
             idRol,
         }).then(async (user) => {
+            console.log(user)
             idUser = user.idUser;
             await Patient.create({
                 identificationCard, name, lastName,
@@ -64,7 +65,6 @@ export const CreateUsers = async (req, res) => {
                 birthdate, placeOfBirth, sex,
                 numberCellphone, bloodType, idUser
             }).then(Patient => {
-                console.log(user)
                 let token = jwt.sign({ user: user }, jwtSK);
                 res.status(201).json({
                     msg: "Patient was created",
@@ -78,7 +78,8 @@ export const CreateUsers = async (req, res) => {
             })
 
         }).catch((err) => {
-            res.status(500).json(err['errors'][0].message)
+            res.status(500).json(err)
+            console.log(err);
         });
 
     }
