@@ -1,7 +1,8 @@
-import { DataTypes, where } from 'sequelize'
+import { DataTypes } from 'sequelize'
 
-import { pool } from '../database/index.js'
-import { Rol } from './rols.Model.js'
+import { pool } from '../../database/index.js'
+import { Rol } from '../rols.Model.js'
+
 
 export const Users = pool.define('Users', {
     idUser: {
@@ -163,7 +164,9 @@ export const Image =  pool.define('Images',{
         }
     }
 
-})
+});
+
+
 Rol.hasMany(Users, {
     foreignKey: {
         allowNull: false,

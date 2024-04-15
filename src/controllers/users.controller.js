@@ -1,8 +1,9 @@
 import jwt from "jsonwebtoken";
 import bcrypt from 'bcrypt'
 
-import { Patient, Users } from '../model/user.Model.js'
+import { Patient, Users } from '../model/patients/patients.Model.js'
 import { jwtSK, jwtRounds } from '../config/config.js'
+import { Doctors } from "../model/doctor.Model.js";
 
 
 export const loginUsers = async (req, res) => {
@@ -18,21 +19,9 @@ export const loginUsers = async (req, res) => {
     const jwtToken = jwt.sign({ id: userWithEmail.id, email: userWithEmail.email }, jwtSK);
     res.status(201).json({ token: jwtToken })
 }
-export const getOneUser = async (req, res) => {
-    const { email } = req.body;
-
-    const usersWithEmail = await Users.findOne({ where: { email } })
-        .catch((err) => { console.log("Error: ", err) });
-
-    if (!usersWithEmail) console.log("The email doesn't exist")
-    else console.log(usersWithEmail);
-
-
-}
 
 export const getAllUsers = async (req, res) => {
-    const usersList = await Patient.findAll()
-    res.json(usersList)
+    console.log("Ua");
 };
 
 
@@ -66,6 +55,7 @@ export const CreateUsers = async (req, res) => {
                 numberCellphone, bloodType, idUser
             }).then(Patient => {
                 let token = jwt.sign({ user: user }, jwtSK);
+                console.log(user.dataValues);
                 res.status(201).json({
                     msg: "Patient was created",
                     token: token
