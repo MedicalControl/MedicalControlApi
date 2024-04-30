@@ -21,11 +21,12 @@ export const loginUsers = async (req, res) => {
 }
 
 export const getAllUsers = async (req, res) => {
-    console.log("Ua");
+    const Patients = await Patient.findAll();
+    res.json(Patients);
 };
 
 
-export const CreateUsers = async (req, res) => {
+export const CreatePatient = async (req, res) => {
     const { password, email, identificationCard, name, lastName,
         homeAddress, innsNumber, profession, birthdate, placeOfBirth,
         sex, numberCellphone, bloodType } = req.body;
@@ -41,7 +42,7 @@ export const CreateUsers = async (req, res) => {
         res.status(400).json({ msg: 'The fields cannot be empty' })
     else {
         const passwordTk = bcrypt.hashSync(password, Number.parseInt(jwtRounds));
-        const newUser = await Users.create({
+        await Users.create({
             password: passwordTk,
             email,
             idRol,

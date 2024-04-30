@@ -1,27 +1,26 @@
 import { Router } from "express"
 
 import { auth } from '../middlewares/auth.js';
-import { CreateUsers, getAllUsers, createRol, loginUsers, getAllRol } from '../controllers/index.js'
+import { CreatePatient, getAllUsers, createRol, loginUsers, getAllRol } from '../controllers/index.js'
 import { createNewDoctor, createSpecialty, getAllSpecialty, getPersonalData } from "../controllers/doctors.controller.js";
 
 const router = Router();
 //Routes for Users
-router.get('/getAllUsers', auth, getAllUsers);
 router.post('/login', loginUsers);
-router.post('/CreateUsers', CreateUsers);
-
-
+//Routes Patients
+router.post('/CreatePatient', CreatePatient);
 //Routes get Rol
-router.post('/createRol', createRol);
-router.get('/getAllRol', auth, getAllRol);
 
 //Routes Doctors
 router.get('/doctor/getPersonalData', getPersonalData )
-router.post('/doctor/createSpecialty', createSpecialty);
+
+
+router.get('/getAllUsers', auth, getAllUsers);
+router.post('/createRol', createRol);
+router.get('/getAllRol', auth, getAllRol);
 router.post('/doctor/createNewDoctor', createNewDoctor);
+router.post('/doctor/createSpecialty', createSpecialty);
 router.get('/doctor/getAllSpecialty', getAllSpecialty);
-
-
 
 
 

@@ -9,7 +9,7 @@ import { Doctors, Specialty } from "../model/doctor.Model.js";
 export const createSpecialty = async (req, res) => {
     const { nameOfSpecialty } = req.body;
     try {
-        const newRol = await Specialty.create({
+        await Specialty.create({
             nameOfSpecialty,
         })
         res.send('Specialty was created');
@@ -26,7 +26,7 @@ export const createNewDoctor = async (req, res) => {
         res.status(400).json({ msg: 'The fields cannot be empty' });
     else {
         const passwordTk = bcrypt.hashSync(password, Number.parseInt(jwtRounds));
-        const newUser = await Users.create({
+        await Users.create({
             password: passwordTk,
             email,
             idRol,
@@ -67,13 +67,12 @@ export const getPersonalData = async (req, res) => {
         else {
             console.log(decode);
             const {idUser} = decode['user'];
-            
-            const getData = await Doctors.findAll({
+            await Doctors.findAll({
                 include: [
                   {
                     model: Users,
                     where: {
-                      idUser: 9, 
+                      idUser: idUser, 
                     },
                     attributes: []
                   },
