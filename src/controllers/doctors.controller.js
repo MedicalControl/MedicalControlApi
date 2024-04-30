@@ -6,17 +6,9 @@ import { jwtSK, jwtRounds } from '../config/config.js'
 import { Doctors, Specialty } from "../model/doctor.Model.js";
 
 
-export const createSpecialty = async (req, res) => {
-    const { nameOfSpecialty } = req.body;
-    try {
-        await Specialty.create({
-            nameOfSpecialty,
-        })
-        res.send('Specialty was created');
-    } catch (err) { console.log(err) }
-}
 
-export const createNewDoctor = async (req, res) => {
+
+export const createDoctor = async (req, res) => {
     const { idSpecialty, name, lastName, password, email, idRol} = req.body;
 
     if (!idRol || idRol != 2) {
@@ -52,11 +44,6 @@ export const createNewDoctor = async (req, res) => {
         });
     }
 
-}
-
-export const getAllSpecialty = async (req, res)=>{
-    const allSpecialty = await Specialty.findAll();
-    res.json(allSpecialty);
 }
 
 export const getPersonalData = async (req, res) => {

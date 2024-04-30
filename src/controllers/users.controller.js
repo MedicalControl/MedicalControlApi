@@ -1,10 +1,9 @@
 import jwt from "jsonwebtoken";
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcrypt';
 
-import { Patient, Users } from '../model/patients/patients.Model.js'
-import { jwtSK, jwtRounds } from '../config/config.js'
-import { Doctors } from "../model/doctor.Model.js";
-
+import { Patient, Users } from '../model/patients/patients.Model.js';
+import { jwtSK } from '../config/config.js';
+import { Rol } from "../model/rols.Model.js";
 
 export const loginUsers = async (req, res) => {
     const { email, password } = req.body;
@@ -25,55 +24,33 @@ export const getAllUsers = async (req, res) => {
     res.json(Patients);
 };
 
-
-export const CreatePatient = async (req, res) => {
-    const { password, email, identificationCard, name, lastName,
-        homeAddress, innsNumber, profession, birthdate, placeOfBirth,
-        sex, numberCellphone, bloodType } = req.body;
-    var { idRol } = req.body;
-    let idUser;
-    idRol ??= 1;
-
-
-    if (!identificationCard && !name && !lastName,
-        !homeAddress && !profession,
-        !birthdate && !placeOfBirth && !sex,
-        !numberCellphone && !bloodType)
-        res.status(400).json({ msg: 'The fields cannot be empty' })
-    else {
-        const passwordTk = bcrypt.hashSync(password, Number.parseInt(jwtRounds));
-        await Users.create({
-            password: passwordTk,
-            email,
-            idRol,
-        }).then(async (user) => {
-            console.log(user)
-            idUser = user.idUser;
-            await Patient.create({
-                identificationCard, name, lastName,
-                homeAddress, innsNumber, profession,
-                birthdate, placeOfBirth, sex,
-                numberCellphone, bloodType, idUser
-            }).then(Patient => {
-                let token = jwt.sign({ user: user }, jwtSK);
-                console.log(user.dataValues);
-                res.status(201).json({
-                    msg: "Patient was created",
-                    token: token
-                })
-            }).catch(err => {
-                res.status(500).json({ msg: err['errors'][0].message });
-                Users.destroy({
-                    where: { idUser }
-                })
-            })
-
-        }).catch((err) => {
-            res.status(500).json(err)
-            console.log(err);
-        });
-
-    }
-
+export const createRol = async (req, res) => {
+    const { nameRol } = req.body;
+    try {
+        const newRol = await Rol.create({
+            nameRol,
+        })
+        console.log(newRol);
+        res.send('Rol was created');
+    } catch (err) { console.log(err) }
 }
 
+export const getAllRol = async (req, res) => {
+    const AllRol = await Rol.findAll()
+    res.json(AllRol);
+}
+
+export const createSpecialty = async (req, res) => {
+    const { nameOfSpecialty } = req.body;
+    try {
+        await Specialty.create({
+            nameOfSpecialty,
+        })
+        res.send('Specialty was created');
+    } catch (err) { console.log(err) }
+}
+
+export const getAllSpecialty = async (req, res)=>{
+    const allSpecialty = await Specialty.findAll();
+    res.json(allSpecialty);
+}

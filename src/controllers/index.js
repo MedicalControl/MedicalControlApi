@@ -1,2 +1,3 @@
-export {createRol, getAllRol} from './Rol.controller.js'
-export {loginUsers, getAllUsers, CreateUsers} from './users.controller.js'
+export {loginUsers, getAllUsers, createRol, getAllRol, createSpecialty, getAllSpecialty,} from './users.controller.js'
+export {createPatient} from './patients.controller.js'
+export { createDoctor, getPersonalData } from "../controllers/doctors.controller.js";
