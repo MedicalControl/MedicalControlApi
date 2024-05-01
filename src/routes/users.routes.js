@@ -1,7 +1,7 @@
 import { Router } from "express"
 import { auth } from '../middlewares/auth.js';
 
-import {loginUsers, createPatient, getPersonalData} from '../controllers/index.js'
+import {loginUsers, createPatient, getPersonalData} from '../controllers/index.controller.js'
 
 const router = Router();
 //Routes for Users

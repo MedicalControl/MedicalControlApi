@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import bcrypt from 'bcrypt'
 
-import { Users } from '../model/patients/patients.Model.js'
+import { Users } from "../model/users.Model.js";
 import { jwtSK, jwtRounds } from '../config/config.js'
 import { Doctors, Specialty } from "../model/doctor.Model.js";
 

@@ -1,38 +1,6 @@
 import { DataTypes } from 'sequelize'
 
-import { pool } from '../../database/index.js'
-import { Rol } from '../rols.Model.js'
-
-
-export const Users = pool.define('Users', {
-    idUser: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-    },
-    email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-        validate: {
-            isEmail: {
-                msg: "The email is invalid"
-            },
-            notNull: {
-                msg: 'fields cannot be empty'
-            }
-        }
-    },
-    password: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            notNull: {
-                msg: 'fields cannot be empty'
-            }
-        }
-    }
-})
+import { pool } from '../database/index.js'
 
 export const Patient = pool.define('Patient', {
     idPatient: {
@@ -139,38 +107,12 @@ export const Patient = pool.define('Patient', {
     }
 });
 
-export const Image =  pool.define('Images',{
-    idImage: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-    },
-    name: {
-        type: DataTypes.STRING, 
-        allowNull: false, 
-        validate: {
-            isNull: {
-                msg: "The image name cannot be empty" 
-            }
-        }
-    },
-    data: {
-        type: DataTypes.BLOB, 
-        allowNull: false, 
-        validate: {
-            isNull: {
-                msg: "The image data cannot be empty"
-            }
-        }
-    }
 
-});
-
-export const medicalRecord = pool.define('medicalRecord', {
+export const MedicalRecord = pool.define('MedicalRecord', {
     idMedicalRecord: {
         type: DataTypes.INTEGER,
         primaryKey: true, 
-        autoIncrement: true,
+        autoIncrement: true
     },
     Record: {
         type: DataTypes.STRING, 
@@ -182,51 +124,4 @@ export const medicalRecord = pool.define('medicalRecord', {
             }
         }
     }, 
-});
-
-
-
-medicalRecord.hasOne(Patient, {
-    foreignKey: {
-        allowNull: false, 
-        name: "idMedicalRecord"
-    }, 
-    sourceKey: "idMedicalRecord"
-});
-Patient.belongsTo(medicalRecord, {
-    foreignKey: {
-        allowNull: false, 
-        name: "idMedicalRecord"
-    }, 
-    sourceKey: "idMedicalRecord"
-})
-
-Rol.hasMany(Users, {
-    foreignKey: {
-        allowNull: false,
-        name: "idRol"
-    },
-    sourceKey: 'idRol'
-});
-Users.belongsTo(Rol, {
-    foreignKey: {
-        allowNull: false,
-        name: "idRol"
-    },
-    targetKey: 'idRol'
-});
-
-Users.hasOne(Patient, {
-    foreignKey: {
-        allowNull: false,
-        name: "idUser"
-    },
-    sourceKey: 'idUser'
-});
-Patient.belongsTo(Users, {
-    foreignKey: {
-        allowNull: false,
-        name: "idUser"
-    },
-    sourceKey: 'idUser'
 });

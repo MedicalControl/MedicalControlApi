@@ -4,9 +4,8 @@ import cors from 'cors'
 
 import {getConnection} from './database/connection.js'
 import { routes } from './routes/index.js'
-import './model/patients/patients.Model.js'
-import './model/rols.Model.js'
-import './model/doctor.Model.js'
+import './model/index.model.js'
+import './model/relations.model.js'
 export class Server {
     #app;
 

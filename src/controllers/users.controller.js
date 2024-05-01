@@ -1,9 +1,10 @@
 import jwt from "jsonwebtoken";
 import bcrypt from 'bcrypt';
 
-import { Patient, Users } from '../model/patients/patients.Model.js';
+import { Patient } from '../model/patients.Model.js';
+import { Rol, Users} from "../model/users.Model.js";
 import { jwtSK } from '../config/config.js';
-import { Rol } from "../model/rols.Model.js";
+
 
 export const loginUsers = async (req, res) => {
     const { email, password } = req.body;

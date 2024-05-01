@@ -1,7 +1,8 @@
 import jwt from "jsonwebtoken";
 import bcrypt from 'bcrypt'
 
-import { Patient, Users } from '../model/patients/patients.Model.js'
+import { Patient } from '../model/patients.Model.js'
+import { Users } from "../model/users.Model.js";
 import { jwtSK, jwtRounds } from '../config/config.js'
 
 export const createPatient = async (req, res) => {
