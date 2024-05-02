@@ -1,4 +1,4 @@
-import {Patient} from "./patients.Model.js";
+import { Patient } from "./patients.Model.js";
 import { Rol, Departments, Municipality, Users } from "./users.Model.js";
 import { Doctors, Specialty } from "./doctor.Model.js";
 
@@ -18,18 +18,32 @@ Patient.belongsTo(MedicalRecord, {
     sourceKey: "idMedicalRecord"
 })
 */
+Departments.hasOne(Municipality, {
+    foreignKey: {
+        allowNull: false,
+        name: 'idDepartment'
+    },
+    sourceKey: 'idDepartment'
+});
+Municipality.belongsTo(Departments, {
+    foreignKey: {
+        allowNull: false,
+        name: 'idDepartment'
+    },
+    sourceKey: 'idDepartment'
+});
 
 Specialty.hasMany(Doctors, {
     foreignKey: {
-        allowNull: false, 
+        allowNull: false,
         name: 'idSpecialty'
-    }, 
+    },
     sourceKey: 'idSpecialty'
 });
 
 Doctors.belongsTo(Specialty, {
     foreignKey: {
-        allowNull: false, 
+        allowNull: false,
         name: 'idSpecialty'
     },
     targetKey: 'idSpecialty'

@@ -1,24 +1,24 @@
 import { DataTypes } from "sequelize";
 import { pool } from '../database/index.js'
 
-export const Image =  pool.define('Images',{
+export const Image = pool.define('Images', {
     idImage: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
     },
     name: {
-        type: DataTypes.STRING, 
-        allowNull: false, 
+        type: DataTypes.STRING,
+        allowNull: false,
         validate: {
             isNull: {
-                msg: "The image name cannot be empty" 
+                msg: "The image name cannot be empty"
             }
         }
     },
     data: {
-        type: DataTypes.BLOB, 
-        allowNull: false, 
+        type: DataTypes.BLOB,
+        allowNull: false,
         validate: {
             isNull: {
                 msg: "The image data cannot be empty"
@@ -26,7 +26,7 @@ export const Image =  pool.define('Images',{
         }
     }
 
-});
+}, {timestamps: false});
 
 export const Rol = pool.define('Rol', {
     idRol: {
@@ -38,41 +38,41 @@ export const Rol = pool.define('Rol', {
         type: DataTypes.STRING,
         allowNull: false,
     }
-})
+}, {timestamps: false})
 export const Departments = pool.define('Departments', {
     idDepartment: {
-        type: DataTypes.INTEGER, 
-        primaryKey: true, 
+        type: DataTypes.INTEGER,
+        primaryKey: true,
         autoIncrement: true
-    }, 
+    },
     Name: {
-        type: DataTypes.STRING, 
-        allowNullL: false, 
-        unique: true, 
+        type: DataTypes.STRING,
+        allowNullL: false,
+        unique: true,
         validate: {
             isNumeric: {
                 msg: "The department name cannot be contain a number"
             }
         }
     }
-}); 
+}, { timestamps: false });
 export const Municipality = pool.define('Municipality', {
     idMunicipality: {
-        type: DataTypes.INTEGER, 
-        primaryKey: true, 
+        type: DataTypes.INTEGER,
+        primaryKey: true,
         autoIncrement: true
-    }, 
+    },
     Name: {
-        type: DataTypes.STRING, 
-        allowNullL: false, 
-        unique: true, 
+        type: DataTypes.STRING,
+        allowNullL: false,
+        unique: true,
         validate: {
             isNumeric: {
                 msg: "The municipality name cannot be contain a number"
             }
         }
     }
-}) 
+}, {timestamps: false})
 
 export const Users = pool.define('Users', {
     idUser: {

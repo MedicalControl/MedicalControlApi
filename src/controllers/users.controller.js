@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from 'bcrypt';
 
 import { Patient } from '../model/patients.Model.js';
-import { Rol, Users} from "../model/users.Model.js";
+import { Departments, Municipality, Rol, Users} from "../model/users.Model.js";
 import { jwtSK } from '../config/config.js';
 
 
@@ -19,7 +19,17 @@ export const loginUsers = async (req, res) => {
     const jwtToken = jwt.sign({ id: userWithEmail.id, email: userWithEmail.email }, jwtSK);
     res.status(201).json({ token: jwtToken })
 }
+export const getDepartments = async (req, res) => {
+    const departmentsData= await Departments.findAll();
+    res.json(departmentsData);
+}
+export const getMunicipality = async (req, res) => {
+    const idDepartment = req.params.idDepartment;
 
+    const MunicipalityData = await Municipality.findAll({where: {idDepartment}})
+    res.json({MunicipalityData });
+  
+}
 export const getAllUsers = async (req, res) => {
     const Patients = await Patient.findAll();
     res.json(Patients);
