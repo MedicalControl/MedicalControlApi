@@ -2,7 +2,7 @@ import { Router } from "express"
 import { auth } from '../middlewares/auth.js';
 
 import {loginUsers, createPatient, getPersonalData} from '../controllers/index.controller.js'
-import { getDepartments, getMunicipality } from "../controllers/users.controller.js";
+import { getDepartments, getMunicipality, createRol } from "../controllers/users.controller.js";
 
 const router = Router();
 //Routes for Users
@@ -13,6 +13,8 @@ router.post('/createPatient', createPatient);
 //Routes Doctors
 router.get('/doctor/getPersonalData', getPersonalData )
 
+router.post('/createRol', createRol);
+
 export default router;
 
 
@@ -21,7 +23,6 @@ export default router;
 /*
 // Admin routes
 router.get('/getAllUsers', auth, getAllUsers);
-router.post('/createRol', createRol);
 router.get('/getAllRol', auth, getAllRol);
 router.post('/doctor/createNewDoctor', createNewDoctor);
 router.post('/doctor/createSpecialty', createSpecialty);

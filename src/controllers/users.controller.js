@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from 'bcrypt';
 
 import { Patient } from '../model/patients.Model.js';
-import { Departments, Municipality, Rol, Users} from "../model/users.Model.js";
+import { Departments, Municipality, Rol, Users } from "../model/users.Model.js";
 import { jwtSK } from '../config/config.js';
 
 
@@ -20,15 +20,15 @@ export const loginUsers = async (req, res) => {
     res.status(201).json({ token: jwtToken })
 }
 export const getDepartments = async (req, res) => {
-    const departmentsData= await Departments.findAll();
+    const departmentsData = await Departments.findAll();
     res.json(departmentsData);
 }
 export const getMunicipality = async (req, res) => {
     const idDepartment = req.params.idDepartment;
 
-    const MunicipalityData = await Municipality.findAll({where: {idDepartment}})
-    res.json({MunicipalityData });
-  
+    const MunicipalityData = await Municipality.findAll({ where: { idDepartment } })
+    res.json({ MunicipalityData });
+
 }
 export const getAllUsers = async (req, res) => {
     const Patients = await Patient.findAll();
@@ -44,7 +44,7 @@ export const createRol = async (req, res) => {
         })
         console.log(newRol);
         res.send('Rol was created');
-    } catch (err) { console.log(err) }
+    } catch (err) { res.json(err) }
 }
 
 export const getAllRol = async (req, res) => {
@@ -62,7 +62,7 @@ export const createSpecialty = async (req, res) => {
     } catch (err) { console.log(err) }
 }
 
-export const getAllSpecialty = async (req, res)=>{
+export const getAllSpecialty = async (req, res) => {
     const allSpecialty = await Specialty.findAll();
     res.json(allSpecialty);
 }

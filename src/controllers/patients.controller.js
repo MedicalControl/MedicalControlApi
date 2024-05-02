@@ -11,7 +11,7 @@ export const createPatient = async (req, res) => {
         sex, numberCellphone, bloodType } = req.body;
     var { idRol } = req.body;
     let idUser;
-    idRol ??= 1;
+    idRol ??= 2;
 
 
     if (!identificationCard && !name && !lastName,
