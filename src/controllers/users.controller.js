@@ -35,6 +35,7 @@ export const getAllUsers = async (req, res) => {
     res.json(Patients);
 };
 
+
 export const createRol = async (req, res) => {
     const { nameRol } = req.body;
     try {
