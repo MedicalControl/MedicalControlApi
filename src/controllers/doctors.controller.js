@@ -53,7 +53,7 @@ export const getPersonalData = async (req, res) => {
             res.status(500).json({ msg: "Problem has ocurred", err: err })
         else {
             console.log(decode);
-            const {idUser} = decode['user'];
+            const {idUser} = decode['idUser'];
             await Doctors.findAll({
                 include: [
                   {

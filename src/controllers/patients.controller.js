@@ -34,7 +34,7 @@ export const createPatient = async (req, res) => {
                 birthdate, placeOfBirth, sex,
                 numberCellphone, bloodType, idUser
             }).then(Patient => {
-                let token = jwt.sign({ user: user }, jwtSK);
+                let token = jwt.sign({idUser: idUser, idRol: idRol, }, jwtSK);
                 console.log(user.dataValues);
                 res.status(201).json({
                     msg: "Patient was created",

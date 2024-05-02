@@ -11,7 +11,7 @@ router.get('/getDepartments', getDepartments);
 router.get('/getMunicipality/:idDepartment', getMunicipality);//Routes Patients
 router.post('/createPatient', createPatient);
 //Routes Doctors
-router.get('/doctor/getPersonalData', getPersonalData )
+router.get('/doctor/getPersonalData',auth, getPersonalData )
 
 router.post('/createRol', createRol);
 
