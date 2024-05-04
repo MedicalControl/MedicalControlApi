@@ -1,17 +1,15 @@
 import { Router } from "express"
 import { auth } from '../middlewares/auth.js';
 
-import {loginUsers, createPatient, getPersonalData} from '../controllers/index.controller.js'
-import { getDepartments, getMunicipality } from "../controllers/users.controller.js";
-
+import * as controllers from '../controllers/index.controller.js'
 const router = Router();
 //Routes for Users
-router.post('/login', loginUsers);
-router.get('/getDepartments', getDepartments);
-router.get('/getMunicipality/:idDepartment', getMunicipality);//Routes Patients
-router.post('/createPatient', createPatient);
+router.post('/login', controllers.loginUsers);
+router.get('/getDepartments', controllers.getDepartments);
+router.get('/getMunicipality/:idDepartment', controllers.getMunicipality);//Routes Patients
+router.post('/createPatient', controllers.createPatient);
 //Routes Doctors
-router.get('/doctor/getPersonalData', getPersonalData )
+router.get('/doctor/getPersonalData', controllers.getPersonalData )
 
 export default router;
 
@@ -19,9 +17,9 @@ export default router;
 
 
 // Admin routes
-router.post('/doctor/createNewDoctor', createNewDoctor);
-router.get('/getAllUsers', auth, getAllUsers);
-router.post('/createRol', createRol);
-router.get('/getAllRol', auth, getAllRol);
-router.post('/doctor/createSpecialty', createSpecialty);
-router.get('/doctor/getAllSpecialty', getAllSpecialty);
+router.post('/doctor/createNewDoctor', controllers.createDoctor);
+router.get('/getAllUsers', auth, controllers.getAllUsers);
+router.post('/createRol', controllers.createRol);
+router.get('/getAllRol', auth, controllers.getAllRol);
+router.post('/doctor/createSpecialty', controllers.createSpecialty);
+router.get('/doctor/getAllSpecialty', controllers.getAllSpecialty);
