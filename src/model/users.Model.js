@@ -24,7 +24,7 @@ export const Image = pool.define('Images', {
                 msg: "The image data cannot be empty"
             }
         }
-    }
+    }, 
 
 }, {timestamps: false});
 
@@ -103,3 +103,5 @@ export const Users = pool.define('Users', {
         }
     }
 })
+
+//Image.sync({force: true});

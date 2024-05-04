@@ -5,9 +5,6 @@ import { Users } from "../model/users.Model.js";
 import { jwtSK, jwtRounds } from '../config/config.js'
 import { Doctors, Specialty } from "../model/doctor.Model.js";
 
-
-
-
 export const createDoctor = async (req, res) => {
     const { idSpecialty, name, lastName, password, email, idRol} = req.body;
 
