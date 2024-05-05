@@ -2,12 +2,8 @@ import jwt from "jsonwebtoken";
 import bcrypt from 'bcrypt';
 
 import { Patient } from '../model/patients.Model.js';
-<<<<<<< HEAD
-import { Departments, Municipality, Rol, Users } from "../model/users.Model.js";
-=======
 import { Specialty } from "../model/doctor.Model.js";
 import { Departments, Municipality, Rol, Users} from "../model/users.Model.js";
->>>>>>> main
 import { jwtSK } from '../config/config.js';
 
 

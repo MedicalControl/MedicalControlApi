@@ -104,7 +104,7 @@ export const Patient = pool.define('Patient', {
             }
 
         }
-    }
+    }, 
 });
 
 
