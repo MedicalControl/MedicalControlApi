@@ -1,8 +1,9 @@
 import jwt from "jsonwebtoken";
 import bcrypt from 'bcrypt'
 import fs from 'fs'
-import { fileURLToPath } from 'url';
-import path, { dirname } from 'path';
+import path from 'path';
+
+import {__dirname} from '../constants/index.js'
 
 import { Patient } from '../model/patients.Model.js'
 import { Users } from "../model/users.Model.js";
@@ -61,11 +62,8 @@ export const createPatient = async (req, res) => {
 }
 
 export const photoProfile = async (req, res) => {
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = dirname(__filename);
     const data = fs.readFileSync(path.join(__dirname, '../resource/images/' + req.file.filename));
     const name = req.file.originalname;
-
     await Image.create({
         data,
         name
@@ -76,8 +74,6 @@ export const photoProfile = async (req, res) => {
     })
 }
 export const getImages = async (req, res) => {
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = dirname(__filename);
     const imagesData = await Image.findAll();
     imagesData.map(
         imag => {
