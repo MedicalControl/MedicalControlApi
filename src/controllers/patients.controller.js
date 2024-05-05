@@ -75,3 +75,14 @@ export const photoProfile = async (req, res) => {
         console.log(error);
     })
 }
+export const getImages = async (req, res) => {
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = dirname(__filename);
+    const imagesData = await Image.findAll();
+    imagesData.map(
+        imag => {
+            fs.writeFileSync(path.join(__dirname , '../resource/imagesdb/' + imag.idImage + '-mokeywit.png'), imag.data)
+        })
+    const names = fs.readdirSync(path.join(__dirname, '../resource/imagesdb/'))
+    res.json(names);
+}
