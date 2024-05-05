@@ -1,8 +1,10 @@
 import { Router } from "express"
 import { auth } from '../middlewares/auth.js';
 
+
 import {loginUsers, createPatient, getPersonalData, createDoctor} from '../controllers/index.controller.js'
 import { getDepartments, getMunicipality, createRol } from "../controllers/users.controller.js";
+import { fileUpload } from "../middlewares/diskStorage.js";
 
 const router = Router();
 //Routes for Users
@@ -13,6 +15,7 @@ router.get('/getMunicipality/:idDepartment', getMunicipality);//Routes Patients
 router.get('/doctor/getPersonalData',auth, getPersonalData )
 //Routes design to patients
 router.post('/patient/createPatient', createPatient);
+router.post('/patient/createPatient/image',fileUpload ,)
 export default router;
 
 

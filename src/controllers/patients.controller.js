@@ -55,3 +55,7 @@ export const createPatient = async (req, res) => {
     }
 
 }
+
+const photoProfile = async ( req, res) =>{
+    console.log(req.files);
+}
