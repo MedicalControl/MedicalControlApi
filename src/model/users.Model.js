@@ -10,20 +10,10 @@ export const Image = pool.define('Images', {
     name: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-            isNull: {
-                msg: "The image name cannot be empty"
-            }
-        }
     },
     data: {
         type: DataTypes.BLOB,
         allowNull: false,
-        validate: {
-            isNull: {
-                msg: "The image data cannot be empty"
-            }
-        }
     }, 
 
 }, {timestamps: false});

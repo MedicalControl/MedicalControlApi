@@ -1,9 +1,13 @@
 import jwt from "jsonwebtoken";
 import bcrypt from 'bcrypt'
+import fs from 'fs'
+import { fileURLToPath } from 'url';
+import path, { dirname } from 'path';
 
 import { Patient } from '../model/patients.Model.js'
 import { Users } from "../model/users.Model.js";
 import { jwtSK, jwtRounds } from '../config/config.js'
+import { Image } from "../model/users.Model.js";
 
 export const createPatient = async (req, res) => {
     const { password, email, identificationCard, name, lastName,
@@ -34,7 +38,7 @@ export const createPatient = async (req, res) => {
                 birthdate, placeOfBirth, sex,
                 numberCellphone, bloodType, idUser
             }).then(Patient => {
-                let token = jwt.sign({idUser: idUser, idRol: idRol, }, jwtSK);
+                let token = jwt.sign({ idUser: idUser, idRol: idRol, }, jwtSK);
                 console.log(user.dataValues);
                 res.status(201).json({
                     msg: "Patient was created",
@@ -56,6 +60,18 @@ export const createPatient = async (req, res) => {
 
 }
 
-export const photoProfile = async ( req, res) =>{
-    console.log(req.file);
+export const photoProfile = async (req, res) => {
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = dirname(__filename);
+    const data = fs.readFileSync(path.join(__dirname, '../resource/images/' + req.file.filename));
+    const name = req.file.originalname;
+
+    await Image.create({
+        data,
+        name
+    }).then(() => {
+        console.log('The photo profile ok');
+    }).catch((error) => {
+        console.log(error);
+    })
 }
