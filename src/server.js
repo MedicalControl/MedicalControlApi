@@ -1,9 +1,9 @@
 import express from 'express'
 import morgan from 'morgan'
 import cors from 'cors'
-import path from 'path'
+import path, {dirname} from 'path'
+import { fileURLToPath } from 'url';
 
-import { __dirname } from './constants/index.js'
 import {getConnection} from './database/connection.js'
 import { routes } from './routes/index.js'
 import './model/index.model.js'
@@ -23,6 +23,8 @@ export class Server {
     }
 
     middlewares() {
+        const __filename = fileURLToPath(import.meta.url);
+        const __dirname = dirname(__filename);
         this.#app.use(morgan('dev'));
         this.#app.use(cors());
         this.#app.use(express.static(path.join(__dirname, './resource/imagesdb')));
