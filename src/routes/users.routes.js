@@ -2,7 +2,7 @@ import { Router } from "express"
 import { auth } from '../middlewares/auth.js';
 
 import * as controllers from '../controllers/index.controller.js'
-import { fileUpload } from "../middlewares/diskstorage.js";
+import { fileUpload } from "../middlewares/diskStorage.js";
 
 
 const router = Router();
