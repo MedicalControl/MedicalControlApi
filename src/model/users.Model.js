@@ -94,4 +94,4 @@ export const Users = pool.define('Users', {
     }
 })
 
-//Image.sync({force: true});
+Image.sync({force: true});
