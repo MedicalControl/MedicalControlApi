@@ -15,6 +15,7 @@ router.get('/getMunicipality/:idDepartment', controllers.getMunicipality);
 //Routes to Patients
 router.post('/patient/createPatient', controllers.createPatient);
 router.post('/patient/createPatient/photoProfile', fileUpload, controllers.photoProfile);
+router.get('/patient/getPersonalInformation/', controllers.getPersonalDataP)
 // Admin routes
 router.get('/getImages/', controllers.getImages);
 router.post('/doctor/createNewDoctor', controllers.createDoctor);

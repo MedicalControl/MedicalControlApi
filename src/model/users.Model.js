@@ -93,5 +93,3 @@ export const Users = pool.define('Users', {
         }
     }
 })
-
-//Image.sync({force: true});

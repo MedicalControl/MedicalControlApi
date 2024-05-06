@@ -1,5 +1,5 @@
 import { Patient } from "./patients.Model.js";
-import { Rol, Departments, Municipality, Users } from "./users.Model.js";
+import { Rol, Departments, Municipality, Users, Image } from "./users.Model.js";
 import { Doctors, Specialty } from "./doctor.Model.js";
 
 /*
@@ -18,6 +18,10 @@ Patient.belongsTo(MedicalRecord, {
     sourceKey: "idMedicalRecord"
 })
 */
+
+
+
+
 Departments.hasOne(Municipality, {
     foreignKey: {
         allowNull: false,
@@ -61,6 +65,21 @@ Doctors.belongsTo(Users, {
         name: "idUser"
     },
     sourceKey: 'idUser'
+});
+
+Image.hasOne(Patient, {
+    foreignKey: {
+        allowNull: false, 
+        name: "idImage"
+    }, 
+    sourceKey: "idImage"
+});
+Patient.belongsTo(Image, {
+    foreignKey: {
+        allowNull: false, 
+        name: "idImage"
+    }, 
+    sourceKey: "idImage"
 });
 
 Rol.hasMany(Users, {

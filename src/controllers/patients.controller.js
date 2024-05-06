@@ -8,14 +8,47 @@ import { Patient } from '../model/patients.Model.js'
 import { Users } from "../model/users.Model.js";
 import { jwtSK, jwtRounds } from '../config/config.js'
 import { Image } from "../model/users.Model.js";
+import { where } from "sequelize";
+
+export const getPersonalDataP = async (req, res) => {
+    const { token } = req.body;
+    jwt.verify(token, jwtSK, async (err, decode) => {
+        if (err)
+            res.status(500).json({ msg: "Problem has ocurred", err: err })
+        else {
+            console.log(decode);
+            await Patient.findAll({
+                where: { idUser: decode['idUser'] },
+                attributes: ['idImage']
+            }).then(async (doctors) => {
+                const idImage = doctors[0]['idImage'];
+                const imagesData = await Image.findAll({ where: { idImage } });
+                console.log('ji');
+                imagesData.map(
+                    imag => {
+                        fs.writeFileSync(path.join(__dirname, '../resource/imagesdb/' + imag.idImage + '-mokeywit.png'), imag.data)
+                    })
+                    res.json(names);
+                    const names = fs.readdirSync(path.join(__dirname, '../resource/imagesdb/'))
+            }).catch(error => {
+                res.json(error);
+            });
+        }
+    })
+}
+
+
 
 export const createPatient = async (req, res) => {
+
     const { password, email, identificationCard, name, lastName,
         homeAddress, innsNumber, profession, birthdate, placeOfBirth,
-        sex, numberCellphone, bloodType } = req.body;
+        sex, numberCellphone, bloodType, data } = req.body;
     var { idRol } = req.body;
-    let idUser;
+    let idUser, idImage;
     idRol ??= 2;
+    if (!data)
+        idImage = 1;
 
 
     if (!identificationCard && !name && !lastName,
@@ -36,7 +69,7 @@ export const createPatient = async (req, res) => {
                 identificationCard, name, lastName,
                 homeAddress, innsNumber, profession,
                 birthdate, placeOfBirth, sex,
-                numberCellphone, bloodType, idUser
+                numberCellphone, bloodType, idUser, idImage
             }).then(Patient => {
                 let token = jwt.sign({ idUser: idUser, idRol: idRol, }, jwtSK);
                 console.log(user.dataValues);
@@ -81,7 +114,7 @@ export const getImages = async (req, res) => {
     const imagesData = await Image.findAll();
     imagesData.map(
         imag => {
-            fs.writeFileSync(path.join(__dirname , '../resource/imagesdb/' + imag.idImage + '-mokeywit.png'), imag.data)
+            fs.writeFileSync(path.join(__dirname, '../resource/imagesdb/' + imag.idImage + '-mokeywit.png'), imag.data)
         })
     const names = fs.readdirSync(path.join(__dirname, '../resource/imagesdb/'))
     res.json(names);
