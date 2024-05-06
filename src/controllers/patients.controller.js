@@ -21,15 +21,16 @@ export const getPersonalDataP = async (req, res) => {
                 where: { idUser: decode['idUser'] },
                 attributes: ['idImage']
             }).then(async (doctors) => {
+                const __filename = fileURLToPath(import.meta.url);
+                const __dirname = dirname(__filename);
+
                 const idImage = doctors[0]['idImage'];
                 const imagesData = await Image.findAll({ where: { idImage } });
-                console.log('ji');
-                imagesData.map(
-                    imag => {
-                        fs.writeFileSync(path.join(__dirname, '../resource/imagesdb/' + imag.idImage + '-mokeywit.png'), imag.data)
-                    })
-                    res.json(names);
-                    const names = fs.readdirSync(path.join(__dirname, '../resource/imagesdb/'))
+                
+                console.log(imagesData[0].idImage);
+                fs.writeFileSync(path.join(__dirname, '../resource/imagesdb/' + imagesData[0].idImage + '-mokeywit.png'), imagesData[0].data)
+                const names = fs.readdirSync(path.join(__dirname, '../resource/imagesdb/'))
+                res.json(names);
             }).catch(error => {
                 res.json(error);
             });
