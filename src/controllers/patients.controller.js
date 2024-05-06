@@ -79,5 +79,5 @@ export const getImages = async (req, res) => {
             fs.writeFileSync(path.join(__dirname , '../resource/imagesdb/' + imag.idImage + '-mokeywit.png'), imag.data)
         })
     const names = fs.readdirSync(path.join(__dirname, '../resource/imagesdb/'))
-    res.json(names);
+    res.json(imagesData);
 }
