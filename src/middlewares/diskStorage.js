@@ -1,11 +1,7 @@
-import { fileURLToPath } from 'url';
-import path, { dirname } from 'path';
+import path from 'path';
 import multer from 'multer';
 
-// Get the current module's file path
-const __filename = fileURLToPath(import.meta.url);
-// Get the directory name of the current module
-const __dirname = dirname(__filename);
+import { __dirname } from '../constants/index.js';
 
 const diskStorage = multer.diskStorage({
     destination: path.join(__dirname, '../resource/images' ), 

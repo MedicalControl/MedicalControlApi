@@ -56,9 +56,7 @@ export const createPatient = async (req, res) => {
             res.status(500).json(err)
             console.log(err);
         });
-
     }
-
 }
 
 export const photoProfile = async (req, res) => {
@@ -72,6 +70,7 @@ export const photoProfile = async (req, res) => {
     }).catch((error) => {
         console.log(error);
     })
+    res.json({msg: "image was saved"})
 }
 export const getImages = async (req, res) => {
     const imagesData = await Image.findAll();
